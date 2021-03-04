@@ -14,15 +14,13 @@ public class Main implements Callable<Integer> {
     }
 
     @CommandLine.Command(name = "clean")
-    public Integer cclean() {
+    public void cclean() {
         System.out.println("Clean !");
-        return 0;
     }
 
     @CommandLine.Command(name = "build")
-    public Integer cbuild() {
+    public void cbuild() {
         System.out.println("Build !");
-        return 0;
     }
 
     @CommandLine.Command(name = "serve")
