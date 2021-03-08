@@ -27,7 +27,7 @@ Cependant, il n'est pas toujours évident d'expliquer ce qui a été réalisé e
 
 # Labo 2 - Software processes
 ## Introduction
-Ce labo à pour but de nous familiarisé avec le workflow de GitHub et de nous y habituer à travailler en groupe.
+Ce labo à pour but de nous familiariser avec le workflow de GitHub et de nous y habituer à travailler en groupe.
 
 ## Type de processus choisi
 Nous travaillons avec les deux types. Tout dépend du moment, au début nous avons pris le temps d'établir les différentes tâches sur le Kaban et de nous les attribuer, 
