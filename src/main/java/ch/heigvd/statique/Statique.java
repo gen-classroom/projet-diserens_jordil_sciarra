@@ -1,9 +1,6 @@
 package ch.heigvd.statique;
 
-import ch.heigvd.statique.command.Clean;
-import ch.heigvd.statique.command.Build;
-import ch.heigvd.statique.command.Init;
-import ch.heigvd.statique.command.Serve;
+import ch.heigvd.statique.command.*;
 import java.util.concurrent.Callable;
 
 import picocli.CommandLine;
