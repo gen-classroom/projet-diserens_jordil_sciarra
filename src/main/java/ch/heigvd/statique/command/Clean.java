@@ -20,15 +20,13 @@ public class Clean implements Callable<Integer> {
     try
     {
       FileUtils.deleteDirectory(new File(pathStr + Statique.SEPARATOR + "build"));
+      System.out.printf("cleaning finished !");
     }
     catch (IOException e)
     {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-
-
-    System.out.printf("cleaning finished !");
 
     return 0;
   }

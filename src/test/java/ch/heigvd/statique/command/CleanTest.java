@@ -30,7 +30,7 @@ class CleanTest
         if (dossier.exists() && dossier.isDirectory()){
             result = true;
         }
-        assertEquals(true, result);
+        assertTrue(result);
 
         // Supprimme l'arborscence de test
         FileUtils.deleteDirectory(new File("./mon"));
