@@ -10,7 +10,7 @@ on:
 jobs:
   build:
 
-    runs-on: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
 
     steps:
     - name: Step 1 - Checkout main branch from Github
