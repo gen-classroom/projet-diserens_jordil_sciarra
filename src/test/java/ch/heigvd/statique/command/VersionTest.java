@@ -9,8 +9,11 @@ import picocli.CommandLine;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class VersionTest {
@@ -27,7 +30,10 @@ public class VersionTest {
     public void shouldReturnCorrectVersionOfApplication() {
         new CommandLine(new Statique()).execute("-version");
         String result = outputStreamCaptor.toString().trim();
-        assertEquals("0.0.1-SNAPSHOT", result);
+
+        Pattern pattern = Pattern.compile("\\d*\\.\\d*\\.\\d*.*");
+        Matcher matcher = pattern.matcher(result);
+        assertTrue(matcher.matches());
     }
 
     @Test
