@@ -1,8 +1,0 @@
-{
-    "url": "./mon/site",
-    "Title": "Website Generator",
-    "Author(s)": "Diserens Loïs, Jordil Kevin, Sciarra Daniel",
-    "Creation date": "2021-03-25",
-    "Dossier des fichiers md:"./contenuMD",
-    "Dossier du site généré:"./build"
-}
