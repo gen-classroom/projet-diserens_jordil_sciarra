@@ -30,7 +30,7 @@ public class Clean implements Callable<Integer> {
 
     System.out.printf("cleaning finished !");
 
-    return 1;
+    return 0;
   }
 
 }
