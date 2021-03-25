@@ -1,14 +1,36 @@
 package ch.heigvd.statique.command;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.Callable;
+
+import ch.heigvd.statique.Statique;
+import org.apache.commons.io.FileUtils;
+
+import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 @Command(name = "clean", description = "Clean a static site")
 public class Clean implements Callable<Integer> {
 
+  @CommandLine.Parameters(index = "0", description = "Path of the root directory for the website") String pathStr;
+
   @Override public Integer call() {
-    System.out.printf("clean");
-    return 1;
+
+    try
+    {
+      FileUtils.deleteDirectory(new File(pathStr + Statique.SEPARATOR + "build"));
+      System.out.printf("cleaning finished !");
+    }
+    catch (IOException e)
+    {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+
+      return 1;
+    }
+
+    return 0;
   }
 
 }
