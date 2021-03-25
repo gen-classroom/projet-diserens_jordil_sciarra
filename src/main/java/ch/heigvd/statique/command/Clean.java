@@ -26,6 +26,8 @@ public class Clean implements Callable<Integer> {
     {
       System.out.println("An error occurred.");
       e.printStackTrace();
+
+      return 1;
     }
 
     return 0;
