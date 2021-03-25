@@ -19,7 +19,13 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: Step 3 - Build with Maven and Tests
+    - name: Step 3 - Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Step 4 - Build with Maven and Tests
       run: mvn --batch-mode --update-snapshots verify
       
 
