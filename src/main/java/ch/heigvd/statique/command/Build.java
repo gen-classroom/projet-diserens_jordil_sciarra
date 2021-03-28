@@ -17,14 +17,15 @@ public class Build implements Callable<Integer> {
     @Override
     public Integer call() {
 
-        File buildDirectory = new File(PATH + "/build"); //build new directory
-        buildDirectory.mkdir();
+        File buildDir = new File(PATH + "/build");
+        buildDir.mkdir();
 
         try {
-            buildSite(new File(PATH), buildDirectory.getPath());
+            buildSite(new File(PATH), buildDir.getPath());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return 1;
     }
 
