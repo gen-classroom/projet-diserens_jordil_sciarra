@@ -13,26 +13,28 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CleanTest
+class InitTest
 {
     @Test
-    public void shouldCleanCorrectly() throws IOException {
-        // Créé une arborscence de test
-        String pathStr = "./mon/site";
-        Path path = Paths.get(pathStr + "/build");
-        Files.createDirectories(path);
+    public void shouldInitCorrectly() throws IOException {
+        // Test la création du config.json, index.md et index.json
+        String pathStr = "./monSite";
 
         // Appel à la commande à tester
-        new CommandLine(new Statique()).execute("clean", "./mon/site/build");
+        new CommandLine(new Statique()).execute("init", pathStr);
 
         boolean result = false;
-        File dossier=new File(pathStr + "/build");
-        if (dossier.exists() && dossier.isDirectory()){
+
+        File configJson = new File(pathStr + "/config.json");
+        File indexMd = new File(pathStr + "/index.md");
+        File indexJson = new File(pathStr + "/index.json");
+
+        if (configJson.exists() && indexMd.exists() && indexJson.exists()){
             result = true;
         }
         assertTrue(result);
 
         // Supprimme l'arborscence de test
-        FileUtils.deleteDirectory(new File("./mon"));
+        FileUtils.deleteDirectory(new File("./monSite"));
     }
 }
