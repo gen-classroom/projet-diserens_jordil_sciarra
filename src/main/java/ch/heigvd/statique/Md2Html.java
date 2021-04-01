@@ -10,8 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public final class Md2Html {
-
+public final class Md2Html
+{
     public static void convert(File mdFile, String destinationPath) throws IOException {
 
         if (!FilenameUtils.getExtension(mdFile.getName()).equals("md"))
