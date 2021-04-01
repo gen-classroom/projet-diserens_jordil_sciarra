@@ -23,7 +23,9 @@ public final class Md2Html {
 
         File output = new File(destinationPath + "/" + FilenameUtils.getBaseName(mdFile.getName()) + ".html");
         FileWriter writer = new FileWriter(output);
+        // write html header -> writer.write(ObjHtml.toString)
         writer.write(renderer.render(document));
+        // write html footer
         writer.close();
     }
 

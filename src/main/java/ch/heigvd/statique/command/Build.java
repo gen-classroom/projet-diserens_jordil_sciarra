@@ -3,25 +3,29 @@ package ch.heigvd.statique.command;
 import ch.heigvd.statique.Md2Html;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
 @Command(name = "build", description = "Build a static site")
 public class Build implements Callable<Integer> {
 
-    private static final String PATH = "src/main/resources/site";
+    @CommandLine.Parameters(index = "0", description = "Path of the build directory for the website") Path pathStr;
 
     @Override
     public Integer call() {
 
-        File buildDir = new File(PATH + "/build");
-        buildDir.mkdir();
-
+        // Creation du chemin de fichier
+        pathStr = pathStr.resolve("build");
         try {
-            buildSite(new File(PATH), buildDir.getPath());
+            Files.createDirectories(pathStr);
+            buildSite(new File(String.valueOf(pathStr.getParent())), String.valueOf(pathStr));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,9 +41,9 @@ public class Build implements Callable<Integer> {
                 for (File file : listFiles) {
                     String fileName = file.getName();
                     if (file.isDirectory() && !fileName.equals("build")) {
-                        File newDir = new File(buildPath + "/" + fileName);
-                        newDir.mkdir();
-                        buildSite(file, newDir.getPath());
+                        Path newPath = Paths.get(buildPath + "/" + fileName);
+                        Files.createDirectories(newPath);
+                        buildSite(file, String.valueOf(newPath));
                     } else if (FilenameUtils.getExtension(fileName).equals("md"))
                         Md2Html.convert(file, buildPath);
                     else if (!FilenameUtils.getExtension(fileName).equals("json") && !file.isDirectory())
