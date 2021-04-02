@@ -3,19 +3,46 @@ package ch.heigvd.statique.command;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.util.Date;
 import java.util.concurrent.Callable;
 
 import ch.heigvd.statique.Statique;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 @Command(name = "init", description = "Initialize a static site directory")
 public class Init implements Callable<Integer> {
+
+    public static class metaFileGson{
+        public final String title, authors, creationDate;
+
+        public metaFileGson(String title, String authors, String creationDate)
+        {
+            this.title = title;
+            this.authors = authors;
+            this.creationDate = creationDate;
+        }
+    }
+
+  public static class MyConfigGson{
+      public final String url, title, authors, date, filesPath, buildPath;
+
+      public MyConfigGson(String url, String title, String authors, String date, String filesPath, String buildPath)
+      {
+          this.url = url;
+          this.title = title;
+          this.authors = authors;
+          this.date = date;
+          this.filesPath = filesPath;
+          this.buildPath = buildPath;
+      }
+  }
 
   @CommandLine.Parameters(index = "0", description = "Path of the root directory for the website") String pathStr;
 
@@ -40,20 +67,16 @@ public class Init implements Callable<Integer> {
           if (configFile.createNewFile())
           {
               System.out.println("File created: " + configFile.getName());
+              String json = new GsonBuilder().setPrettyPrinting().create().toJson(new MyConfigGson(pathStr,"Website Generator",
+                      "Diserens Lois, Jordil Kevin, Sciarra Daniel",
+                      String.valueOf(java.time.LocalDate.now()),
+                      "./contenuMD", "./build"));
 
-              // Ecriture des éléments de base
-              String contenuConfig = "" +
-                      "{\n"+
-                      "    \"url\": \""+ pathStr + "\",\n"+
-                      "    \"Title\": \"Website Generator\",\n"+
-                      "    \"Author(s)\": \"Diserens Loïs, Jordil Kevin, Sciarra Daniel\",\n"+
-                      "    \"Creation date\": \""+ java.time.LocalDate.now() + "\",\n"+
-                      "    \"Dossier des fichiers md:\"./contenuMD\",\n"+
-                      "    \"Dossier du site généré:\"./build\"\n"+
-                      "}";
 
-              FileWriter writer = new FileWriter(configFile.getPath());
-              writer.write(contenuConfig);
+              Writer writer = Files.newBufferedWriter(Paths.get(configFile.getPath()));
+
+              writer.write(json);
+
               writer.close();
           }
           else
@@ -93,6 +116,23 @@ public class Init implements Callable<Integer> {
           else
           {
               System.out.println("File already exists("+ indexFile.getName() +").");
+          }
+
+          File metaIndexFile = new File(path + Statique.SEPARATOR + "index.json");
+          if (metaIndexFile.createNewFile())
+          {
+              System.out.println("File created: " + metaIndexFile.getName());
+              String json = new GsonBuilder().setPrettyPrinting().create().toJson(new metaFileGson("Accueil",
+                                                                                "Diserens Lois, Jordil Kevin, Sciarra Daniel",
+                                                                                        String.valueOf(java.time.LocalDate.now())));
+
+              Writer writer = Files.newBufferedWriter(Paths.get(metaIndexFile.getPath()));
+              writer.write(json);
+              writer.close();
+          }
+          else
+          {
+              System.out.println("File already exists("+ metaIndexFile.getName() +").");
           }
       }
       catch (IOException e)
