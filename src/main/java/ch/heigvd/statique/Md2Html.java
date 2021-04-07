@@ -21,9 +21,15 @@ public final class Md2Html
         Node document = parser.parse(Files.readString(mdFile.toPath()));
         HtmlRenderer renderer = HtmlRenderer.builder().build();
 
+        File json = new File(mdFile.getParent() + "/" + FilenameUtils.removeExtension(mdFile.getName()) + ".json");
+
         File output = new File(destinationPath + "/" + FilenameUtils.getBaseName(mdFile.getName()) + ".html");
         FileWriter writer = new FileWriter(output);
         // write html header -> writer.write(ObjHtml.toString)
+        if (json.exists()) {
+            Node jsonNode = parser.parse(Files.readString(json.toPath()));
+            writer.write(renderer.render(document));
+        }
         writer.write(renderer.render(document));
         // write html footer
         writer.close();
