@@ -14,9 +14,6 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 public final class Md2Html {
-    private static final String TITLE_TAG = "title",
-            AUTHOR_TAG = "authors",
-            DATE_TAG = "creationDate";
 
     public static void convert(File mdFile, String destinationPath) throws IOException {
 
