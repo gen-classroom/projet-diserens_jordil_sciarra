@@ -34,15 +34,19 @@ public final class Md2Html {
         // write html header if provided
         File header = new File(mdFile.getParent() + "/" + FilenameUtils.removeExtension(mdFile.getName()) + ".json");
         if (header.exists()) {
-            Map<?, ?> json = new Gson().fromJson(Files.newBufferedReader(Paths.get(header.getPath())), Map.class);
-            String title = "<title>" + json.get(TITLE_TAG) + "</title>";
-            String author = "<meta name=\"auteur\" content=\"" + json.get(AUTHOR_TAG) + "\">";
-            String date = "<meta name=\"date de creation\" content=\"" + json.get(DATE_TAG) + "\">";
-            writer.write("<head>\n" +
-                                title + "\n" +
-                                author + "\n" +
-                                date + "\n" +
-                            "</head>\n");
+            Map<?, ?> metas = new Gson().fromJson(Files.newBufferedReader(Paths.get(header.getPath())), Map.class);
+            writer.write("<head>\n");
+            metas.forEach((name, content)  -> {
+                try {
+                    if(name.equals("title"))
+                        writer.write("<title>" + content + "</title>\n");
+                    else
+                        writer.write("<meta name=\"" + name + "\" content=\"" + content + "\">\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            writer.write("</head>\n");
         }
 
         // write md content
