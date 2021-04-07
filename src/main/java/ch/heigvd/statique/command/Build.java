@@ -30,7 +30,7 @@ public class Build implements Callable<Integer> {
             e.printStackTrace();
         }
 
-        return 1;
+        return 0;
     }
 
     private void buildSite(File rootDirectory, String buildPath) throws IOException {
