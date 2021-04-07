@@ -23,17 +23,17 @@ De plus, pour compiler le projet il faut installer [Maven](https://maven.apache.
 
 ### Compilation
 
-Pour compiler le projet, il faut ouvrir un invité de commande à l'emplacement du projet et exécuter la commande suivante
+Pour compiler le projet, il faut ouvrir un invite de commande à l'emplacement du projet et exécuter la commande suivante
 ```sh
 mvn package
 ```
-La génération du projet sera disponible dans le dossier target.
+La génération du projet sera disponibles dans le dossier target.
 
 ## Utiliser le générateur de site statique
 
-Tout d'abord, il faut soit compiler le projet soit télécharger le zip générer dans la dernière [release](https://github.com/gen-classroom/projet-diserens_jordil_sciarra/releases).
+Tout d'abord, il faut soit compiler le projet, soit télécharger le zip générer dans la dernière [release](https://github.com/gen-classroom/projet-diserens_jordil_sciarra/releases).
 
 Pour exécuter le projet il faut ouvrir un terminal à l'emplacement du projet dézippé. Puis avec la commande ```statique``` , voir les différentes commandes disponible.
 
 ### Utiliser le générateur partout
-Pour utiliser le générateur de site depuis n'importe ou dans le terminal, il faut ajouter le répertoire dézipper au path.
+Pour utiliser le générateur de site depuis n'importe où dans le terminal, il faut ajouter le répertoire dézippé au path.
