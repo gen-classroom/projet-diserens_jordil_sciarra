@@ -100,10 +100,6 @@ public class Init implements Callable<Integer> {
 
               // Ecriture des éléments de base
               String contenuIndex = "" +
-                      "titre: Acceuil\n" +
-                      "auteur: Diserens Lois\n" +
-                      "date de creation: 2021-18-03\n" +
-                      "---\n" +
                       "# Accueil\n" +
                       "## Bienvenue\n" +
                       "Bienvenue sur cette page générée automatiquement";
