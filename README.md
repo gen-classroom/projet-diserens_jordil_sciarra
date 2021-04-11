@@ -58,9 +58,9 @@ Pour initialiser la structure nécessaire, il faut utiliser la commande ```stati
 
 ### Commande build
 
-Permet de générer le HTML à partir du Markdown : ```statique build <path>```.
+Permet de générer le dossier build (fichiers Markdown convertir en HTML) : ```statique build <path>```.
 
-Il est possible de d'ajouter facilement des métadonnées à vos fichiers HTML en les précisant dans le fichier JSON portant le même nom :
+Il est possible d'ajouter facilement des métadonnées à vos fichiers HTML en les inscrivant dans un fichier JSON portant le même nom :
 #### **`Index.md`**
 ```md
 # Accueil
