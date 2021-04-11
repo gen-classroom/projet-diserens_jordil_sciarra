@@ -37,3 +37,53 @@ Pour exécuter le projet il faut ouvrir un terminal à l'emplacement du projet d
 
 ### Utiliser le générateur partout
 Pour utiliser le générateur de site depuis n'importe où dans le terminal, il faut ajouter le répertoire dézippé au path.
+
+## Commandes disponibles
+
+Pour obtenir la liste des commandes, il faut simplement lancer ```statique``` (```statique.bat``` sur Windows) :
+```
+Usage: statique [COMMAND]
+A brand new static site generator.
+Commands:
+  init      Initialize a static site directory
+  clean     Clean a static site
+  build     Build a static site
+  serve     Serve a static site
+  -version  Get version of static site generator
+```
+
+### Commande init
+
+Pour initialiser la structure nécessaire, il faut utiliser la commande ```statique init <path>```. Par exemple : ```statique init ./Mon/Site```
+
+### Commande build
+
+Permet de générer le HTML à partir du Markdown : ```statique build <path>```.
+
+Il est possible de d'ajouter facilement des métadonnées à vos fichiers HTML en les précisant dans le fichier JSON portant le même nom :
+#### **`Index.md`**
+```md
+# Accueil
+## Bienvenue
+Bienvenue sur cette page générée automatiquement
+```
+#### **`Index.json`**
+```json
+{
+  "title": "Accueil",
+  "authors": "Diserens Lois, Jordil Kevin, Sciarra Daniel",
+  "creationDate": "2021-04-11"
+}
+```
+
+### Commande clean
+
+Permet de supprimer la génération du site HTML : ```statique clean <path>```
+
+### Commande version
+
+Permet d'obtenir la version du générateur de site statique : ```statique -version```
+
+### Commande serve
+
+Non implémenté
