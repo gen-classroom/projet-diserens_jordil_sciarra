@@ -102,7 +102,7 @@ public class Init implements Callable<Integer> {
               String contenuIndex = "" +
                       "# Accueil\n" +
                       "## Bienvenue\n" +
-                      "Bienvenue sur cette page générée automatiquement";
+                      "Bienvenue sur cette page générée automatiquement\n";
 
               FileWriter writer = new FileWriter(indexFile.getPath());
               writer.write(contenuIndex);
@@ -137,7 +137,7 @@ public class Init implements Callable<Integer> {
           e.printStackTrace();
       }
 
-      return 1;
+      return 0;
   }
 
 }
