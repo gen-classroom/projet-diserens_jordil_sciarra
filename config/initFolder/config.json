@@ -1,0 +1,8 @@
+{
+  "url": "/monSite2",
+  "title": "Website Generator",
+  "authors": "Diserens Lois, Jordil Kevin, Sciarra Daniel",
+  "date": "2021-04-25",
+  "filesPath": "./contenuMD",
+  "buildPath": "./build"
+}
