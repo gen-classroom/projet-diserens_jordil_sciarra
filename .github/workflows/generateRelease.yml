@@ -1,0 +1,37 @@
+name: "generate release"
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  tagged-release:
+    name: "Generate release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      # ...
+      - name: Step 1 - Checkout main branch from Github
+        uses: actions/checkout@v2
+      - name: Step 2 - Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Step 3 - Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Step 4 - Build with Maven and Tests
+        run: mvn --batch-mode --update-snapshots verify
+      - name: "Step 5 - Create release"
+        run: |
+          echo "done!"
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            statique.zip
