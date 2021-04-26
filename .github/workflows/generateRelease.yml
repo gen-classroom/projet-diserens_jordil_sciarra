@@ -26,7 +26,11 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Step 4 - Build with Maven
         run: mvn clean install
-      - name: "Step 5 - Create release"
+      - name: Step 5 - Publish package
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Step 6 - Create release
         run: |
           echo "done!"
       - uses: "marvinpinto/action-automatic-releases@latest"
