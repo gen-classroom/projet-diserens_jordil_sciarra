@@ -1,6 +1,7 @@
 package ch.heigvd.statique.command;
 
 import ch.heigvd.statique.Md2Html;
+import ch.heigvd.statique.TemplateEngine;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import picocli.CommandLine;
@@ -45,7 +46,7 @@ public class Build implements Callable<Integer> {
                         Files.createDirectories(newPath);
                         buildSite(file, String.valueOf(newPath));
                     } else if (FilenameUtils.getExtension(fileName).equals("md"))
-                        Md2Html.convert(file, buildPath);
+                        TemplateEngine.generatePage(fileName, Md2Html.convert(file), buildPath);
                     else if (!FilenameUtils.getExtension(fileName).equals("json") && !file.isDirectory())
                         FileUtils.copyFile(file, new File(buildPath + "/" + fileName));
                 }
