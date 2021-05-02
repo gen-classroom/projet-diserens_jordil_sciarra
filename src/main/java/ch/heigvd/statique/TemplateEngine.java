@@ -2,6 +2,7 @@ package ch.heigvd.statique;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
+import com.github.jknack.handlebars.internal.Files;
 import com.github.jknack.handlebars.io.FileTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import com.google.gson.Gson;
@@ -27,7 +28,8 @@ public class TemplateEngine {
         BufferedReader index = new BufferedReader(new FileReader(INDEX_FILE, StandardCharsets.UTF_8));
         Map indexFile = new Gson().fromJson(index, Map.class);
         // ou extraction à partir du HtmlContent ?
-        BufferedReader menu = new BufferedReader(new FileReader(MENU_FILE, StandardCharsets.UTF_8));
+        BufferedReader menuFile = new BufferedReader(new FileReader(MENU_FILE, StandardCharsets.UTF_8));
+        String menu = Files.read(menuFile);
 
         TemplateLoader loader = new FileTemplateLoader(TEMPLATE_DIR, ".html");
         Handlebars handlebars = new Handlebars(loader);
@@ -37,7 +39,7 @@ public class TemplateEngine {
         Map<String, String> parameterMap = new HashMap<>();
         parameterMap.put("siteTitre", configFile.get("title").toString());
         parameterMap.put("pageTitre", indexFile.get("title").toString());
-        parameterMap.put("menu", menu.toString());
+        parameterMap.put("menu", menu);
         parameterMap.put("content", content.getContent().toString());
 
         writer.write(template.apply(parameterMap));

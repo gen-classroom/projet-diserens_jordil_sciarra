@@ -41,12 +41,12 @@ public class Build implements Callable<Integer> {
             if (listFiles != null)
                 for (File file : listFiles) {
                     String fileName = file.getName();
-                    if (file.isDirectory() && !fileName.equals("build")) {
+                    if (file.isDirectory() && !fileName.equals("build") && !fileName.equals("template")) {
                         Path newPath = Paths.get(buildPath + "/" + fileName);
                         Files.createDirectories(newPath);
                         buildSite(file, String.valueOf(newPath));
                     } else if (FilenameUtils.getExtension(fileName).equals("md"))
-                        TemplateEngine.generatePage(fileName, Md2Html.convert(file), buildPath);
+                        TemplateEngine.generatePage(FilenameUtils.removeExtension(fileName), Md2Html.convert(file), buildPath);
                     else if (!FilenameUtils.getExtension(fileName).equals("json") && !file.isDirectory())
                         FileUtils.copyFile(file, new File(buildPath + "/" + fileName));
                 }

@@ -25,26 +25,27 @@ public final class Md2Html {
 
         // remplacer par HtmlContent
         HtmlContent htmlContent = new HtmlContent();
-        htmlContent.append("<!DOCTYPE html>\n<html>\n");
+//        htmlContent.append("<!DOCTYPE html>\n<html>\n");
 
-        // write html header if provided
-        File header = new File(mdFile.getParent() + "/" + FilenameUtils.removeExtension(mdFile.getName()) + ".json");
-        if (header.exists()) {
-            Map<?, ?> metas = new Gson().fromJson(Files.newBufferedReader(Paths.get(header.getPath())), Map.class);
-            htmlContent.append("<head>\n");
-            metas.forEach((name, content) -> {
-                if (name.equals("title"))
-                    htmlContent.append("<title>" + content + "</title>\n");
-                else
-                    htmlContent.append("<meta name=\"" + name + "\" content=\"" + content + "\">\n");
-            });
-            htmlContent.append("</head>\n");
-        }
+//        // write html header if provided
+//        File header = new File(mdFile.getParent() + "/" + FilenameUtils.removeExtension(mdFile.getName()) + ".json");
+//        if (header.exists()) {
+//            Map<?, ?> metas = new Gson().fromJson(Files.newBufferedReader(Paths.get(header.getPath())), Map.class);
+//            htmlContent.append("<head>\n");
+//            metas.forEach((name, content) -> {
+//                if (name.equals("title"))
+//                    htmlContent.append("<title>" + content + "</title>\n");
+//                else
+//                    htmlContent.append("<meta name=\"" + name + "\" content=\"" + content + "\">\n");
+//            });
+//            htmlContent.append("</head>\n");
+//        }
 
         // write md content
-        htmlContent.append("<body>\n" + renderer.render(document) + "</body>\n");
+//        htmlContent.append("<body>\n" + renderer.render(document) + "</body>\n");
+        htmlContent.append(renderer.render(document));
 
-        htmlContent.append("</html>\n");
+//        htmlContent.append("</html>\n");
         return htmlContent;
     }
 
