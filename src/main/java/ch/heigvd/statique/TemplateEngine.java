@@ -2,7 +2,7 @@ package ch.heigvd.statique;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
-import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
+import com.github.jknack.handlebars.io.FileTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
 import com.google.gson.Gson;
 
@@ -29,7 +29,7 @@ public class TemplateEngine {
         // ou extraction à partir du HtmlContent ?
         BufferedReader menu = new BufferedReader(new FileReader(MENU_FILE, StandardCharsets.UTF_8));
 
-        TemplateLoader loader = new ClassPathTemplateLoader(TEMPLATE_DIR, ".html");
+        TemplateLoader loader = new FileTemplateLoader(TEMPLATE_DIR, ".html");
         Handlebars handlebars = new Handlebars(loader);
         handlebars.setPrettyPrint(true);
         Template template = handlebars.compile("layout");
