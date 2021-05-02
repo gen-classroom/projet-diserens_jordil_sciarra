@@ -14,7 +14,8 @@ import java.util.Map;
 public class TemplateEngine {
 
     private static String CONFIG_FILE = "config/initFolder/config.json";
-    private static String INDEX_TITLE = "config/initFolder/index.json";
+    private static String INDEX_FILE = "config/initFolder/index.json";
+    private static String MENU_FILE = "config/initFolder/template/menu.html";
     private static String TEMPLATE_DIR = "config/initFolder/template";
 
     public static void generatePage(String fileName, HtmlContent content, String destinationPath) throws IOException {
@@ -23,17 +24,20 @@ public class TemplateEngine {
         FileWriter writer = new FileWriter(output);
         BufferedReader config = new BufferedReader(new FileReader(CONFIG_FILE, StandardCharsets.UTF_8));
         Map configFile = new Gson().fromJson(config, Map.class);
-        BufferedReader index = new BufferedReader(new FileReader(CONFIG_FILE, StandardCharsets.UTF_8));
+        BufferedReader index = new BufferedReader(new FileReader(INDEX_FILE, StandardCharsets.UTF_8));
         Map indexFile = new Gson().fromJson(index, Map.class);
+        // ou extraction à partir du HtmlContent ?
+        BufferedReader menu = new BufferedReader(new FileReader(MENU_FILE, StandardCharsets.UTF_8));
 
-
-        TemplateLoader loader = new ClassPathTemplateLoader("TEMPLATE_DIR", ".html");
+        TemplateLoader loader = new ClassPathTemplateLoader(TEMPLATE_DIR, ".html");
         Handlebars handlebars = new Handlebars(loader);
+        handlebars.setPrettyPrint(true);
         Template template = handlebars.compile("layout");
 
         Map<String, String> parameterMap = new HashMap<>();
         parameterMap.put("siteTitre", configFile.get("title").toString());
         parameterMap.put("pageTitre", indexFile.get("title").toString());
+        parameterMap.put("menu", menu.toString());
         parameterMap.put("content", content.getContent().toString());
 
         writer.write(template.apply(parameterMap));
