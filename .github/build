@@ -1,1 +1,4 @@
+apt-get update --quiet
+apt-get --assume-yes install  maven
+
 mvn clean package
