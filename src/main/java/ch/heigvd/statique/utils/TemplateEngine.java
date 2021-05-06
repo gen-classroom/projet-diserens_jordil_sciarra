@@ -1,4 +1,4 @@
-package ch.heigvd.statique;
+package ch.heigvd.statique.utils;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;

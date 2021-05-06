@@ -1,4 +1,4 @@
-package ch.heigvd.statique;
+package ch.heigvd.statique.utils;
 
 import org.apache.commons.io.FilenameUtils;
 import org.commonmark.node.Node;

@@ -1,4 +1,4 @@
-package ch.heigvd.statique;
+package ch.heigvd.statique.utils;
 
 public class HtmlContent {
     private final StringBuilder content;

@@ -1,10 +1,10 @@
 package ch.heigvd.statique;
 
 import ch.heigvd.statique.command.*;
-import java.util.concurrent.Callable;
-
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+
+import java.util.concurrent.Callable;
 
 @Command(
     name = "statique",
