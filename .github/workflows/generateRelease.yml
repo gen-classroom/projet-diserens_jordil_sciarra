@@ -31,7 +31,7 @@ jobs:
       - name: Step 5 - Create release and upload zip
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          automatic_release_tag: "latest"
+          automatic_release_tag: "${{ github.ref }}"
           prerelease: false
           title: Release ${{ github.ref }}
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
