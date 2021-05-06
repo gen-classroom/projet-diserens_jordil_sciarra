@@ -1,15 +1,14 @@
 package ch.heigvd.statique.command;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.concurrent.Callable;
-
 import ch.heigvd.statique.Statique;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.concurrent.Callable;
 
 @Command(name = "serve", description = "Serve a static site")
 public class Serve implements Callable<Integer> {

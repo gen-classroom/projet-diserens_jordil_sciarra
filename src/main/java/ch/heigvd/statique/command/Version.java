@@ -1,9 +1,10 @@
 package ch.heigvd.statique.command;
 
+import picocli.CommandLine.Command;
+
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.Callable;
-import picocli.CommandLine.Command;
 
 @Command(name = "-version", description = "Get version of static site generator")
 public class Version implements Callable<Integer> {

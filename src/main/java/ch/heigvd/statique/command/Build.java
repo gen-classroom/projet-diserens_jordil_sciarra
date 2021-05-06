@@ -1,6 +1,6 @@
 package ch.heigvd.statique.command;
 
-import ch.heigvd.statique.TemplateEngine;
+import ch.heigvd.statique.utils.TemplateEngine;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import picocli.CommandLine;
