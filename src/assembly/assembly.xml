@@ -26,6 +26,13 @@
             <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
+            <directory>config</directory>
+            <outputDirectory>bin/config</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>target</directory>
             <outputDirectory>lib</outputDirectory>
             <includes>
