@@ -24,8 +24,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Step 4 - Publish package
-        run: mvn deploy
+      - name: Step 4 - Compile
+        run: mvn clean package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Step 5 - Create release
