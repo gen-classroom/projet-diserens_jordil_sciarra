@@ -24,13 +24,11 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Step 4 - Build with Maven
-        run: mvn clean install
-      - name: Step 5 - Publish package
-        run: mvn --batch-mode deploy
+      - name: Step 4 - Publish package
+        run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Step 6 - Create release
+      - name: Step 5 - Create release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -41,7 +39,8 @@ jobs:
           body: |
           draft: false
           prerelease: false
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Step 6 - Upload zip
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
