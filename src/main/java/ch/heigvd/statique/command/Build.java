@@ -1,6 +1,6 @@
 package ch.heigvd.statique.command;
 
-import ch.heigvd.statique.Md2Html;
+import ch.heigvd.statique.TemplateEngine;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import picocli.CommandLine;
@@ -40,12 +40,16 @@ public class Build implements Callable<Integer> {
             if (listFiles != null)
                 for (File file : listFiles) {
                     String fileName = file.getName();
-                    if (file.isDirectory() && !fileName.equals("build")) {
+                    // build récursif sur les dossiers (sauf dossier build et template)
+                    if (file.isDirectory() && !fileName.equals("build") && !fileName.equals("template")) {
                         Path newPath = Paths.get(buildPath + "/" + fileName);
                         Files.createDirectories(newPath);
                         buildSite(file, String.valueOf(newPath));
-                    } else if (FilenameUtils.getExtension(fileName).equals("md"))
-                        Md2Html.convert(file, buildPath);
+                    }
+                    // génère la page si c'est un fichier md
+                    else if (FilenameUtils.getExtension(fileName).equals("md"))
+                        TemplateEngine.generatePage(file, buildPath);
+                    // copie les autres fichiers (.json exclus)
                     else if (!FilenameUtils.getExtension(fileName).equals("json") && !file.isDirectory())
                         FileUtils.copyFile(file, new File(buildPath + "/" + fileName));
                 }

@@ -86,4 +86,4 @@ Permet d'obtenir la version du générateur de site statique : ```statique -vers
 
 ### Commande serve
 
-Non implémenté
+Permet de simuler un serveur web en visualisant le site dans le navigateur par defaut : ```statique serve <path>```
