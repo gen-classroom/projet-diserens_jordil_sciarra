@@ -29,7 +29,7 @@ public class TemplateEngine {
         // création de l'output HTML
         String fileName = FilenameUtils.removeExtension(file.getName());
         File output = new File(destinationPath + "/" + fileName + ".html");
-        FileWriter writer = new FileWriter(output);
+        FileWriter writer = new FileWriter(output, StandardCharsets.UTF_8);
 
         // récupération des données de configuration
         BufferedReader config = new BufferedReader(new FileReader(CONFIG_FILE, StandardCharsets.UTF_8));
