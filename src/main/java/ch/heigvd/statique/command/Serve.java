@@ -1,6 +1,9 @@
 package ch.heigvd.statique.command;
 
 import ch.heigvd.statique.Statique;
+import ch.heigvd.statique.utils.TemplateEngine;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
@@ -15,7 +18,9 @@ public class Serve implements Callable<Integer> {
 
   @CommandLine.Parameters(index = "0", description = "Path of the build directory for the website") Path pathStr;
 
-  @Override public Integer call()
+    final static Logger logger = LogManager.getLogger(TemplateEngine.class.getName());
+
+    @Override public Integer call()
   {
       try
       {
@@ -23,7 +28,7 @@ public class Serve implements Callable<Integer> {
           Desktop.getDesktop().open(fileToOpen);
       } catch (IOException e)
       {
-          e.printStackTrace();
+          logger.fatal("Context : ", e);
       }
 
       return 0;
