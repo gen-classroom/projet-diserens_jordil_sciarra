@@ -38,7 +38,7 @@ jobs:
           draft: false
           prerelease: false
       - name: Step 6 - Upload Statique Zip to Release
-        id: upload-release-asset 
+        id: upload-statique-asset 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,7 +48,7 @@ jobs:
           asset_name: statique.zip
           asset_content_type: application/zip
       - name: Step 8 - Upload Javadoc Zip to Release
-        id: upload-release-asset 
+        id: upload-zip-asset 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
