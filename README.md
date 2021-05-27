@@ -98,7 +98,7 @@ SonarQube cannot be run as root on Unix-based systems, so create a dedicated use
 
 $SONARQUBE-HOME (below) refers to the path to the directory where the SonarQube distribution has been unzipped.
 
-# Starting the Web Server
+## Starting the Web Server
 The default port is "9000" and the context path is "/". These values can be changed in $SONARQUBE-HOME/conf/sonar.properties.
 
 Execute the following script to start the server:
@@ -107,7 +107,7 @@ Execute the following script to start the server:
 
 You can now browse SonarQube at http://localhost:9000 (the default System administrator credentials are admin/admin).
 
-Once on the SonarQube server, you have to add a project (following the instructions), which will generate a login token. Then you can run the code analysis with the following command :
+Once on the SonarQube server, you have to add a project (following the instructions), which will generate a login token. Then you can run the code analysis with the following command in a terminal (in project's folder) :
 ```
 mvn sonar:sonar \
   -Dsonar.projectKey=<groupId:artifactId> \
