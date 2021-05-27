@@ -110,6 +110,7 @@ You can now browse SonarQube at http://localhost:9000 (the default System admini
 Once on the SonarQube server, you have to add a project (following the instructions), which will generate a login token. Then you can run the code analysis with the following command in a terminal (in project's folder) :
 
 > replaceing `groupId:artifactId` and `generatedToken` by the appropriate values
+> 
 > Default `groupId:artifactId` : statique
 
 ```
