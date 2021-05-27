@@ -108,7 +108,10 @@ Execute the following script to start the server:
 You can now browse SonarQube at http://localhost:9000 (the default System administrator credentials are admin/admin).
 
 Once on the SonarQube server, you have to add a project (following the instructions), which will generate a login token. Then you can run the code analysis with the following command in a terminal (in project's folder) :
-(replaceing `groupId:artifactId` and `generatedToken` by the appropriate values)
+
+> replaceing `groupId:artifactId` and `generatedToken` by the appropriate values
+> Default `groupId:artifactId` : statique
+
 ```
 mvn sonar:sonar \
   -Dsonar.projectKey=<groupId:artifactId> \
@@ -116,4 +119,3 @@ mvn sonar:sonar \
   -Dsonar.login=<generatedToken>
 ```
 
-> Default `groupId:artifactId` : statique
