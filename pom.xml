@@ -9,6 +9,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
+
   <name>projet-diserens_jordil_sciarra</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
@@ -27,13 +28,30 @@
       </resource>
     </resources>
     <plugins>
+
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>javadoc</goal>
+            </goals>
+            <id>generate-javadoc</id>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.3.0</version>
         <executions>
           <execution>
-            <id>make-zip</id>
+            <id>statique-zip</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>
@@ -42,12 +60,28 @@
               <finalName>statique</finalName>
               <appendAssemblyId>false</appendAssemblyId>
               <descriptors>
-                <descriptor>src/assembly/assembly.xml</descriptor>
+                <descriptor>src/assembly/statique.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>javadoc-zip</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <finalName>javadoc</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>src/assembly/javadoc.xml</descriptor>
               </descriptors>
             </configuration>
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
