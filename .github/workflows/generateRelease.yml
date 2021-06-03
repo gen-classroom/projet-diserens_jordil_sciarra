@@ -47,7 +47,7 @@ jobs:
           asset_path: target/statique.zip
           asset_name: statique.zip
           asset_content_type: application/zip
-      - name: Step 8 - Upload Javadoc Zip to Release
+      - name: Step 7 - Upload Javadoc Zip to Release
         id: upload-zip-asset 
         uses: actions/upload-release-asset@v1
         env:
