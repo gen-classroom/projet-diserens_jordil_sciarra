@@ -87,3 +87,33 @@ Permet d'obtenir la version du générateur de site statique : ```statique -vers
 ### Commande serve
 
 Permet de simuler un serveur web en visualisant le site dans le navigateur par defaut : ```statique serve <path>```
+
+# Utiliser SonarQube pour l'analyse de la qualité du code
+Vous pouvez vous référer au site officiel [documentation](https://docs.sonarqube.org/latest/setup/install-server/) pour plus de détails et pour une configuration avancée.
+
+## Installation de SonarQube depuis le fichier ZIP
+
+Tout d'abord, vérifiez les [exigences](https://docs.sonarqube.org/latest/requirements/requirements/). Ensuite, téléchargez et décompressez la [distribution](https://www.sonarqube.org/downloads/) (ne décompressez pas dans un répertoire commençant par un chiffre).
+
+SonarQube ne peut pas être exécuté en tant que root sur les systèmes basés sur Unix, créez donc un compte utilisateur dédié pour SonarQube si nécessaire.
+
+$SONARQUBE-HOME (ci-dessous) fait référence au chemin du répertoire dans lequel la distribution SonarQube a été décompressée.
+
+## Démarrage du serveur Web
+Le port par défaut est "9000" et le chemin du contexte est "/". Ces valeurs peuvent être modifiées dans $SONARQUBE-HOME/conf/sonar.properties.
+
+Exécutez le script suivant pour démarrer le serveur :
+- Sous Windows : bin/windows-x86-64/StartSonar.bat
+- Sous Linux : bin/linux-x86-64/sonar.sh start
+
+Vous pouvez maintenant accéder à SonarQube à l'adresse http://localhost:9000 (les informations d'identification de l'administrateur système par défaut sont admin/admin).
+
+Une fois sur le serveur SonarQube, vous devez ajouter un projet (en suivant les instructions), ce qui générera un jeton de connexion. Ensuite, vous pouvez lancer l'analyse de code avec la commande suivante dans un terminal (dans le dossier du projet) :
+
+> En remplaçant `groupId:artifactId` et `generatedToken` par les valeurs appropriées
+> 
+> Par défaut `groupId:artifactId` : statique
+
+```
+mvn sonar:sonar -Dsonar.projectKey=<groupId:artifactId> -Dsonar.host.url=http://localhost:9000 -Dsonar.login=<generatedToken>
+```

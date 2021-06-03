@@ -1,6 +1,9 @@
 package ch.heigvd.statique.command;
 
+import ch.heigvd.statique.utils.TemplateEngine;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
@@ -15,7 +18,10 @@ import java.util.concurrent.Callable;
 public class Init implements Callable<Integer> {
 
   @CommandLine.Parameters(index = "0", description = "Path of the root directory for the website") String pathStr;
-  @Override public Integer call()
+
+    final static Logger logger = LogManager.getLogger(TemplateEngine.class.getName());
+
+    @Override public Integer call()
   {
       // Creation du chemin de fichier
       Path path = Paths.get(pathStr);
@@ -25,7 +31,7 @@ public class Init implements Callable<Integer> {
       catch (IOException e)
       {
           System.out.println("Error when create site folder");
-          e.printStackTrace();
+          logger.fatal("Context : ", e);
       }
 
       // Copie du template
@@ -38,7 +44,7 @@ public class Init implements Callable<Integer> {
       catch (IOException e)
       {
           System.out.println("Error when copy ");
-          e.printStackTrace();
+          logger.fatal("Context : ", e);
       }
 
       return 0;
