@@ -84,7 +84,7 @@ Dans ce fichier, vous pouvez indiquer votre titre comme ceci :
 }
 ```
 
-Il y a également un titre de site. C'est à dire que chaque page aura le titre au format suivant ```Titre du site - Titre de la page```.
+Il y a également un titre de site. C'est-à-dire que chaque page aura le titre au format suivant ```Titre du site - Titre de la page```.
 Pour renseigner ce titre de site, il faut éditer le fichier config.json qui se trouve à la racine et renseigner le titre voulu :
 ```json
 {
@@ -92,11 +92,12 @@ Pour renseigner ce titre de site, il faut éditer le fichier config.json qui se 
 }
 ```
 
+--- 
 
-## Utiliser SonarQube pour l'analyse de la qualité du code
+# Utiliser SonarQube pour l'analyse de la qualité du code
 Vous pouvez vous référer au site officiel [documentation](https://docs.sonarqube.org/latest/setup/install-server/) pour plus de détails et pour une configuration avancée.
 
-### Installation de SonarQube depuis le fichier ZIP
+## Installation de SonarQube depuis le fichier ZIP
 
 Tout d'abord, vérifiez les [exigences](https://docs.sonarqube.org/latest/requirements/requirements/). Ensuite, téléchargez et décompressez la [distribution](https://www.sonarqube.org/downloads/) (ne décompressez pas dans un répertoire commençant par un chiffre).
 
@@ -104,7 +105,7 @@ SonarQube ne peut pas être exécuté en tant que root sur les systèmes basés 
 
 $SONARQUBE-HOME (ci-dessous) fait référence au chemin du répertoire dans lequel la distribution SonarQube a été décompressée.
 
-### Démarrage du serveur Web
+## Démarrage du serveur Web
 Le port par défaut est "9000" et le chemin du contexte est "/". Ces valeurs peuvent être modifiées dans $SONARQUBE-HOME/conf/sonar.properties.
 
 Exécutez le script suivant pour démarrer le serveur :
