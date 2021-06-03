@@ -14,6 +14,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TemplateEngine {
 
@@ -21,47 +23,54 @@ public class TemplateEngine {
     private static final String MENU_FILE = "config/initFolder/template/menu.html";
     private static final String TEMPLATE_DIR = "config/initFolder/template";
 
-    public static void generatePage(File file, String destinationPath) throws IOException {
+    final static Logger logger = LogManager.getLogger(TemplateEngine.class.getName());
 
-        // conversion du MD en HTML
-        HtmlContent content = Md2Html.convert(file);
+    public static void generatePage(File file, String destinationPath) {
 
-        // création de l'output HTML
-        String fileName = FilenameUtils.removeExtension(file.getName());
-        File output = new File(destinationPath + "/" + fileName + ".html");
-        FileWriter writer = new FileWriter(output, StandardCharsets.UTF_8);
+        try {
+            // conversion du MD en HTML
+            HtmlContent content = Md2Html.convert(file);
 
-        // récupération des données de configuration
-        BufferedReader config = new BufferedReader(new FileReader(CONFIG_FILE, StandardCharsets.UTF_8));
-        Map<?, ?> configFile = new Gson().fromJson(config, Map.class);
+            // création de l'output HTML
+            String fileName = FilenameUtils.removeExtension(file.getName());
+            File output = new File(destinationPath + "/" + fileName + ".html");
+            FileWriter writer = new FileWriter(output, StandardCharsets.UTF_8);
 
-        // récupération des métadonnées
-        Map<?, ?> metas = null;
-        File header = new File(file.getParent() + "/" + fileName + ".json");
-        if (header.exists()) {
-            metas = new Gson().fromJson(Files.newBufferedReader(Paths.get(header.getPath())), Map.class);
+            // récupération des données de configuration
+            BufferedReader config = new BufferedReader(new FileReader(CONFIG_FILE, StandardCharsets.UTF_8));
+            Map<?, ?> configFile = new Gson().fromJson(config, Map.class);
+
+            // récupération des métadonnées
+            Map<?, ?> metas = null;
+            File header = new File(file.getParent() + "/" + fileName + ".json");
+            if (header.exists()) {
+                metas = new Gson().fromJson(Files.newBufferedReader(Paths.get(header.getPath())), Map.class);
+            }
+
+            // récupération du menu
+            String menu = Files.readString(Path.of(MENU_FILE), StandardCharsets.UTF_8);
+
+            // préparation du template avec Handlebars
+            TemplateLoader loader = new FileTemplateLoader(TEMPLATE_DIR, ".html");
+            Handlebars handlebars = new Handlebars(loader);
+            handlebars.setPrettyPrint(true);
+            Template template = handlebars.compile("layout");
+
+            // injection avec Handlebars
+            Map<String, String> parameterMap = new HashMap<>();
+            parameterMap.put("siteTitre", configFile.get("title").toString());
+            if (metas != null) {
+                parameterMap.put("pageTitre", metas.get("title").toString());
+            }
+            parameterMap.put("menu", menu);
+            parameterMap.put("content", content.getContent().toString());
+
+            // écriture de l'output
+            writer.write(template.apply(parameterMap));
+            writer.close();
         }
-
-        // récupération du menu
-        String menu = Files.readString(Path.of(MENU_FILE), StandardCharsets.UTF_8);
-
-        // préparation du template avec Handlebars
-        TemplateLoader loader = new FileTemplateLoader(TEMPLATE_DIR, ".html");
-        Handlebars handlebars = new Handlebars(loader);
-        handlebars.setPrettyPrint(true);
-        Template template = handlebars.compile("layout");
-
-        // injection avec Handlebars
-        Map<String, String> parameterMap = new HashMap<>();
-        parameterMap.put("siteTitre", configFile.get("title").toString());
-        if (metas != null) {
-            parameterMap.put("pageTitre", metas.get("title").toString());
+        catch (IOException e) {
+            logger.fatal("Context : ", e);
         }
-        parameterMap.put("menu", menu);
-        parameterMap.put("content", content.getContent().toString());
-
-        // écriture de l'output
-        writer.write(template.apply(parameterMap));
-        writer.close();
     }
 }
