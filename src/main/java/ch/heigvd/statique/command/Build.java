@@ -3,6 +3,8 @@ package ch.heigvd.statique.command;
 import ch.heigvd.statique.utils.TemplateEngine;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
@@ -16,6 +18,8 @@ public class Build implements Callable<Integer> {
 
     @CommandLine.Parameters(index = "0", description = "Path of the build directory for the website") Path pathStr;
     @CommandLine.Option(names = "--watch", description = "Watch option", negatable = true) Boolean isWatchDemanded = false;
+
+    final static Logger logger = LogManager.getLogger(TemplateEngine.class.getName());
 
     @Override
     public Integer call() {
@@ -52,7 +56,7 @@ public class Build implements Callable<Integer> {
                 }
             }
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            logger.fatal("Context : ", e);
         }
 
         return 0;
