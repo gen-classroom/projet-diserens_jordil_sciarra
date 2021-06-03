@@ -88,35 +88,32 @@ Permet d'obtenir la version du générateur de site statique : ```statique -vers
 
 Permet de simuler un serveur web en visualisant le site dans le navigateur par defaut : ```statique serve <path>```
 
-# Using SonarQube for code quality analysis
-You can refer to the official [documentation](https://docs.sonarqube.org/latest/setup/install-server/) for more details and advanced configuration.
+# Utiliser SonarQube pour l'analyse de la qualité du code
+Vous pouvez vous référer au site officiel [documentation](https://docs.sonarqube.org/latest/setup/install-server/) pour plus de détails et pour une configuration avancée.
 
-## Installing SonarQube from the ZIP file
-First, check the [requirements](https://docs.sonarqube.org/latest/requirements/requirements/). Then download and unzip the [distribution](https://www.sonarqube.org/downloads/) (do not unzip into a directory starting with a digit).
+## Installation de SonarQube depuis le fichier ZIP
 
-SonarQube cannot be run as root on Unix-based systems, so create a dedicated user account for SonarQube if necessary.
+Tout d'abord, vérifiez les [exigences](https://docs.sonarqube.org/latest/requirements/requirements/). Ensuite, téléchargez et décompressez la [distribution](https://www.sonarqube.org/downloads/) (ne décompressez pas dans un répertoire commençant par un chiffre).
 
-$SONARQUBE-HOME (below) refers to the path to the directory where the SonarQube distribution has been unzipped.
+SonarQube ne peut pas être exécuté en tant que root sur les systèmes basés sur Unix, créez donc un compte utilisateur dédié pour SonarQube si nécessaire.
 
-## Starting the Web Server
-The default port is "9000" and the context path is "/". These values can be changed in $SONARQUBE-HOME/conf/sonar.properties.
+$SONARQUBE-HOME (ci-dessous) fait référence au chemin du répertoire dans lequel la distribution SonarQube a été décompressée.
 
-Execute the following script to start the server:
-- On Windows: bin/windows-x86-64/StartSonar.bat
-- On Linux: bin/linux-x86-64/sonar.sh start
+## Démarrage du serveur Web
+Le port par défaut est "9000" et le chemin du contexte est "/". Ces valeurs peuvent être modifiées dans $SONARQUBE-HOME/conf/sonar.properties.
 
-You can now browse SonarQube at http://localhost:9000 (the default System administrator credentials are admin/admin).
+Exécutez le script suivant pour démarrer le serveur :
+- Sous Windows : bin/windows-x86-64/StartSonar.bat
+- Sous Linux : bin/linux-x86-64/sonar.sh start
 
-Once on the SonarQube server, you have to add a project (following the instructions), which will generate a login token. Then you can run the code analysis with the following command in a terminal (in project's folder) :
+Vous pouvez maintenant accéder à SonarQube à l'adresse http://localhost:9000 (les informations d'identification de l'administrateur système par défaut sont admin/admin).
 
-> replaceing `groupId:artifactId` and `generatedToken` by the appropriate values
+Une fois sur le serveur SonarQube, vous devez ajouter un projet (en suivant les instructions), ce qui générera un jeton de connexion. Ensuite, vous pouvez lancer l'analyse de code avec la commande suivante dans un terminal (dans le dossier du projet) :
+
+> En remplaçant `groupId:artifactId` et `generatedToken` par les valeurs appropriées
 > 
-> Default `groupId:artifactId` : statique
+> Par défaut `groupId:artifactId` : statique
 
 ```
-mvn sonar:sonar \
-  -Dsonar.projectKey=<groupId:artifactId> \
-  -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=<generatedToken>
+mvn sonar:sonar -Dsonar.projectKey=<groupId:artifactId> -Dsonar.host.url=http://localhost:9000 -Dsonar.login=<generatedToken>
 ```
-
