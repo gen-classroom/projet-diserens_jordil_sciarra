@@ -94,7 +94,10 @@ Pour renseigner ce titre de site, il faut éditer le fichier config.json qui se 
 
 --- 
 
-# Utiliser SonarQube pour l'analyse de la qualité du code
+# Utiliser SonarQube pour l'analyse de la qualité du code et du code coverage
+
+Le rapport de la couverture de code par l'outil [JaCoCo](https://www.jacoco.org/jacoco/) a été intégré à SonarQube.
+
 Vous pouvez vous référer au site officiel [documentation](https://docs.sonarqube.org/latest/setup/install-server/) pour plus de détails et pour une configuration avancée.
 
 ## Installation de SonarQube depuis le fichier ZIP
