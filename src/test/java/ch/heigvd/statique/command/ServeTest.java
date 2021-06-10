@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ServeTest
 {
-    @Disabled("Ne marche pas sur Git car il n a pas de desktop")
+    @Test
+    @DisabledIfSystemProperty(named = "ci-server", matches = "true")
     public void shouldReturnCorrectExitCode() throws IOException {
         // Créé une arborscence de test
         String pathStr = "./monSite";
