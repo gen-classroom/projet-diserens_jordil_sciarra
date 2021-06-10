@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ServeTest
 {
+    @Ignore("Test is ignored because GitHub doesn t have a desktop")
     @Test
     public void shouldReturnCorrectExitCode() throws IOException {
         // Créé une arborscence de test
