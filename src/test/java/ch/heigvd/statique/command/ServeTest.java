@@ -2,8 +2,8 @@ package ch.heigvd.statique.command;
 
 import ch.heigvd.statique.Statique;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ServeTest
 {
     @Test
-    @Disabled
+    @DisabledIfSystemProperty(named = "ci-server", matches = "true")
     public void shouldReturnCorrectExitCode() throws IOException {
         // Créé une arborscence de test
         String pathStr = "./monSite";
