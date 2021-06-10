@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CleanTest
 {
     @Test
-    public void shouldCleanCorrectly() throws IOException {
+    void shouldCleanCorrectly() throws IOException {
         // Créé une arborscence de test
         String pathStr = "./mon/site";
         Path path = Paths.get(pathStr + "/build");

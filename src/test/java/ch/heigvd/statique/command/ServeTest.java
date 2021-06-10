@@ -15,7 +15,7 @@ class ServeTest
 {
     @Test
     @DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = "true")
-    public void shouldReturnCorrectExitCode() throws IOException {
+    void shouldReturnCorrectExitCode() throws IOException {
         // Créé une arborscence de test
         String pathStr = "./monSite";
         new CommandLine(new Statique()).execute("init", pathStr);

@@ -55,7 +55,10 @@ public class Build implements Callable<Integer> {
                     key.reset();
                 }
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (InterruptedException e) {
+            logger.fatal("Context : ", e);
+            Thread.currentThread().interrupt();
+        } catch (IOException e) {
             logger.fatal("Context : ", e);
         }
 
