@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ServeTest
 {
     @Test
-    @Disabled
+    @DisabledIfEnvironmentVariable(named = "ENV", matches = "staging-server")
     public void shouldReturnCorrectExitCode() throws IOException {
         // Créé une arborscence de test
         String pathStr = "./monSite";
