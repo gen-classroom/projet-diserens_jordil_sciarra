@@ -2,9 +2,9 @@ package ch.heigvd.statique.command;
 
 
 import ch.heigvd.statique.Statique;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
 import java.io.ByteArrayOutputStream;

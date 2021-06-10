@@ -2,27 +2,27 @@ package ch.heigvd.statique.command;
 
 import ch.heigvd.statique.Statique;
 import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ServeTest
 {
+    @Test
     public void shouldReturnCorrectExitCode() throws IOException {
         // Créé une arborscence de test
-        String pathStr = "./mon/site";
-        File indexHTML= new File(pathStr + "/index.html");
+        String pathStr = "./monSite";
+        new CommandLine(new Statique()).execute("init", pathStr);
+        new CommandLine(new Statique()).execute("build", pathStr);
 
-        int result = new CommandLine(new Statique()).execute("./mon/site/index.html");
-        assertEquals(result, 0);
+        int result = new CommandLine(new Statique()).execute("serve", "./monSite");
+        assertEquals(0, result);
 
         // Supprimme l'arborscence de test
-        FileUtils.deleteDirectory(new File("./mon"));
+        FileUtils.deleteDirectory(new File("./monSite"));
     }
 }
