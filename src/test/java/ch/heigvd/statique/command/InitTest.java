@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class InitTest
 {
     @Test
-    public void shouldInitCorrectly() throws IOException {
+    void shouldInitCorrectly() throws IOException {
         // Test la création du config.json, index.md et index.json
         String pathStr = "./monSite";
 

@@ -25,7 +25,10 @@ public class TemplateEngine {
 
     final static Logger logger = LogManager.getLogger(TemplateEngine.class.getName());
 
-    public static void generatePage(File file, String destinationPath) {
+    public static void generatePage(File file, String destinationPath) throws IOException {
+
+        FileWriter writer = null;
+        BufferedReader config = null;
 
         try {
             // conversion du MD en HTML
@@ -34,10 +37,10 @@ public class TemplateEngine {
             // création de l'output HTML
             String fileName = FilenameUtils.removeExtension(file.getName());
             File output = new File(destinationPath + "/" + fileName + ".html");
-            FileWriter writer = new FileWriter(output, StandardCharsets.UTF_8);
+            writer = new FileWriter(output, StandardCharsets.UTF_8);
 
             // récupération des données de configuration
-            BufferedReader config = new BufferedReader(new FileReader(CONFIG_FILE, StandardCharsets.UTF_8));
+            config = new BufferedReader(new FileReader(CONFIG_FILE, StandardCharsets.UTF_8));
             Map<?, ?> configFile = new Gson().fromJson(config, Map.class);
 
             // récupération des métadonnées
@@ -68,9 +71,16 @@ public class TemplateEngine {
             // écriture de l'output
             writer.write(template.apply(parameterMap));
             writer.close();
+            config.close();
         }
         catch (IOException e) {
             logger.fatal("Context : ", e);
+        }
+        finally {
+            if (writer != null)
+                writer.close();
+            if (config != null)
+                config.close();
         }
     }
 }

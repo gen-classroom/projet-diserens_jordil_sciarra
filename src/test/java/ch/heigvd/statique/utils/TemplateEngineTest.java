@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TemplateEngineTest {
+class TemplateEngineTest {
 
     private final Path testFolder = Paths.get("src/main/resources/test");
 

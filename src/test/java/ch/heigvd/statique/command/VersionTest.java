@@ -16,18 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class VersionTest {
+class VersionTest {
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
     @Test
-    public void shouldReturnCorrectVersionOfApplication() {
+    void shouldReturnCorrectVersionOfApplication() {
         new CommandLine(new Statique()).execute("-version");
         String result = outputStreamCaptor.toString().trim();
 
@@ -37,13 +37,13 @@ public class VersionTest {
     }
 
     @Test
-    public void shouldReturnCorrectExitCode() {
+    void shouldReturnCorrectExitCode() {
         int result = new CommandLine(new Statique()).execute("-version");
-        assertEquals(result, 0);
+        assertEquals(0, result);
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         System.setOut(standardOut);
     }
 

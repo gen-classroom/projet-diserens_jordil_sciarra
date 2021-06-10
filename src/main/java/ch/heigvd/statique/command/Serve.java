@@ -21,8 +21,7 @@ public class Serve implements Callable<Integer> {
 
     final static Logger logger = LogManager.getLogger(TemplateEngine.class.getName());
 
-    @Override public Integer call()
-  {
+    @Override public Integer call() {
       try
       {
           File fileToOpen = new File(pathStr + Statique.SEPARATOR + "build" + Statique.SEPARATOR + "index.html");
@@ -49,8 +48,10 @@ public class Serve implements Callable<Integer> {
                   key.reset();
               }
           }
-      } catch (IOException | InterruptedException e)
-      {
+      } catch (InterruptedException e) {
+          logger.fatal("Context : ", e);
+          Thread.currentThread().interrupt();
+      } catch (IOException e) {
           logger.fatal("Context : ", e);
       }
 
